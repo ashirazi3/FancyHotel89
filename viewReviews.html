@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Reviews</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
+    <script language="javascript" type="text/javascript" src="jquery-1.8.3.js"></script>
+    <script src="scripts/custom.js"></script>
+</head>
+
+
+<h1>
+    View Review
+</h1>
+
+<h3>
+    Hotel Location:
+
+    <select>
+        <option>Atlanta</option>
+        <option>Orlando</option>
+        <option>Seattle</option>
+    </select>
+</h3>
+
+<div class="wrapper">
+    <button id="show">
+        Check Reviews
+    </button>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#show").click(function(){
+        $("table").show();
+    });
+});
+</script>
+
+<br>
+<br>
+
+<div class="fancyTable">
+    <table id="fancyTable" style="display:none">
+        <tr>
+            <td>
+                Month
+            </td>
+            <td>
+                Location
+            </td>
+            <td>
+                Total Number
+                </br>
+                of Reservations
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Example
+            </td>
+            <td>
+                Example
+            </td>
+            <td>
+                Example
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Example
+            </td>
+            <td>
+                Example
+            </td>
+            <td>
+                Example
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+</body>
+</html>
