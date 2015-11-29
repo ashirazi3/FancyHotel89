@@ -9,6 +9,7 @@
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/hover.css">
+    <script type="text/javascript" src="scripts/pageOptions.js"></script>
     <style>
         h1 {
             color:white; text-align: center
@@ -22,7 +23,13 @@
             width: 100%;
             height: 140%;
         }
-    
+        body {
+             background: url('hotel.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        } 
         .table1{
             visibility: visible;
             margin-top: 100px;;
@@ -35,7 +42,7 @@
     
   </head>
 
-  <body background="hotel.png">
+  <body>
 
     <div>
         <h1>Welcome Tanay,</h1>
@@ -43,24 +50,22 @@
     <div style="visibility:visible; margin-top: 100px">
           <table id = "ordersNearby" class="table table1" style="background:transparent">
                 <tr style="text-align:center;">
-                    <td><button class="btn hvr-fade">Make a new reservation</button></td>
+                    <td><button class="btn btn-primary" onclick="makeReservation();">Make a new reservation</button></td>
                 </tr>
                 <tr style="text-align:center;">
-                    <td><button class="btn hvr-fade">Update your reservation</button></td>
+                    <td><button class="btn btn-primary">Update your reservation</button></td>
                 </tr>                   
                 <tr style="text-align:center;">
-                    <td><button class="btn hvr-fade">Cancel Reservation</button></td>
+                    <td><button class="btn btn-primary" onclick="cancelReservation()">Cancel Reservation</button></td>
                 </tr>                   
                 <tr style="text-align:center;">
-                    <td><button class="btn hvr-fade">Provide feedback</button></td>
+                    <td><button class="btn btn-primary" onclick="giveFeedback();">Provide feedback</button></td>
                 </tr>
                 <tr style="text-align:center;">
-                    <td><button class="btn hvr-fade">View feedback</button></td>
+                    <td><button class="btn btn-primary" onclick="viewFeedback();">View feedback</button></td>
                 </tr>
           </table>
     </div>
-
-      <script type="text/javascript" src="js/joinOrder.js"></script>
 
   </body>
 </html>

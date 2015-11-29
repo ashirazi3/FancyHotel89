@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Search Rooms</title>
+        <link rel="stylesheet" href="styles/hover.css">
+        <style>
+            .h1{
+                text-align: center;
+            }
+            .h2{
+                text-align: center;
+            }
+            
+            .element{
+                width: 20%;
+                margin-left: 40%;
+            }
+             body {
+                 background: url('hotel.jpg') no-repeat center center fixed; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            } 
+        </style>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div style="margin-top: -22px; background:#b9b9b9">
+            <h1 style="text-align: center">Search Rooms</h1>
+        </div>
+        <div class="container">
+            <h2 class="h1">Location</h2>
+            <select class="element" name="locations">
+                <option value="atlanta">Atlanta,</option>
+                <option value="charlotte">Charlotte,</option>
+                <option value="savannah">Savannah,</option>
+                <option value="orlando">Orlando,</option>
+                <option value="miami">Miami,</option>
+            </select>
+            <h2 class="h2">Start Date</h2>
+            <input class="element" type="date" name="startDate" min="2000-01-02"><br>
+            <h2 class="h2">Start Date</h2>
+            <input class="element "type="date" name="endDate" min="2000-01-02"><br>
+            <button type="button" style="margin-top: 20px; margin-left : 45%; width: 10%"class="btn btn-warning">Search</button>
+        </div>
+    </body>
+</html>

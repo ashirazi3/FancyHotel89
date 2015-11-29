@@ -23,32 +23,14 @@
 		        e.preventDefault();
 		    });
 		    $('#login-submit').click(function (e) {
-		        document.getElementById('login-form').setAttribute("action", "homePage.html");
+		        document.getElementById('login-form').setAttribute("action", "CustomerHomePage.html");
 
 		    });
 
 		    $("#register-submit").click(function (e) {
+		            document.getElementById('register-form').setAttribute("action", "CustomerHomePage.html");
 
-		        console.log("register button clicked");
-		        var username = document.getElementById("username1").value;
-		        var email = document.getElementById("email").value;
-		        var pass = document.getElementById("password1").value;
-		        var confirm_pass = document.getElementById("confirm-password").value;
-		        if (pass.localeCompare(confirm_pass) == 0) {
-		            console.log("passwords match!");
-		            var url = "http://104.236.124.199/users?";
-		            var response = httpPost(url, username, email);
-		            window.alert("posted");
-		            //var jsonObj = JSON.parse(response);
-		            setCookie("Email", email);
-		            document.getElementById('register-form').setAttribute("action", "page2.html");
-
-
-		        }
-		        //var a = "world";
-		        //setTimeout(alert("Hello " + a), 2000);
-
-		    })
+		     })
 		});
 
 function setCookie(name, val){
