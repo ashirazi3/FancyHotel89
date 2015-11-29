@@ -1,4 +1,12 @@
-
+<?php
+include('main.php');
+$conn = connectDB("FancyHotel");
+$query = "SELECT Username FROM User WHERE Email='" . $_SESSION["username"] . "' OR Username='" . $_SESSION["username"] . "';";
+$rs = selectQuery($conn, $query);
+while($row = $rs->fetch_assoc()){
+    $_SESSION["username"] = $row["Username"];
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +59,6 @@
 
 <div>
     <?php
-    include('main.php');
     echo "<h1> Welcome ". $_SESSION['username'] .",</h1>";
     ?>
 </div>

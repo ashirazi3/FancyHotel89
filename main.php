@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('error_reporting', E_ALL);
+//ini_set('display_errors', '1');
+//ini_set('error_reporting', E_ALL);
 
 session_start();
 $error = '';
@@ -33,7 +33,7 @@ if (isset($_POST['login-submit'])) {
     } else {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $conn = connectDB("fancyHotel");
+        $conn = connectDB("FancyHotel");
         $query = "SELECT * FROM User WHERE Password='" . $password . "' AND Email='" . $username . "';";
         $rs = selectQuery($conn, $query);
 
@@ -60,7 +60,7 @@ if (isset($_POST['register-submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $email = $_POST['email'];
-    $conn = connectDB("fancyHotel");
+    $conn = connectDB("FancyHotel");
     $query = "INSERT INTO User(Username, Email, Password, IsManager) VALUES ('$username','$email','$password', 'n')";
     $rs = selectQuery($conn, $query);
 }
