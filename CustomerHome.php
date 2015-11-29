@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,9 +51,9 @@
 
 <div>
     <?php
-           echo "<h1> Hello </h1>";
+    include('main.php');
+    echo "<h1> Welcome ". $_SESSION['username'] .",</h1>";
     ?>
-    <h1>Welcome Tanay,</h1>
 </div>
 <div style="visibility:visible; margin-top: 100px">
     <table id="ordersNearby" class="table table1" style="background:transparent">
