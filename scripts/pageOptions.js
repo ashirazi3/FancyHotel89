@@ -23,5 +23,13 @@ function cancelReservation(){
 }
 
 function makeReservation(){
-    window.location.href = "makeReservation.html";
+    window.location.href = "searchRooms.html";
+}
+
+function updateReservation(){
+    window.location.href = "updateReservation.html";
+}
+
+function makeRes(){
+     window.location.href = "makeReservation.html";
 }
