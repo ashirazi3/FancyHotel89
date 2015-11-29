@@ -1,6 +1,6 @@
 <?php
-//ini_set('display_errors', '1');
-//ini_set('error_reporting', E_ALL);
+ini_set('display_errors', '1');
+ini_set('error_reporting', E_ALL);
 
 session_start();
 $error = '';
@@ -50,10 +50,19 @@ if (isset($_POST['login-submit'])) {
 }
 
 if (isset($_POST['register-submit'])) {
-    if(empty($_POST['username1']) || empty($_POST['email']) || empty($_POST['password1']) || empty($_POST['confirm-password'])) {
-    }else if($_POST['password1'] != $_POST['confirm-password']){
-
-    }
+//    if(empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password1']) || empty($_POST['confirm-password'])) {
+//        echo "fsfd";
+//    }else if($_POST['password1'] != $_POST['confirm-password']){
+//
+//    }else{
+//
+//    }
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $conn = connectDB("fancyHotel");
+    $query = "INSERT INTO User(Username, Email, Password, IsManager) VALUES ('$username','$email','$password', 'n')";
+    $rs = selectQuery($conn, $query);
 }
 
 
