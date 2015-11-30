@@ -1,6 +1,6 @@
 <?php
-//ini_set('display_errors', '1');
-//ini_set('error_reporting', E_ALL);
+ini_set('display_errors', '1');
+ini_set('error_reporting', E_ALL);
 
 session_start();
 $error = '';
@@ -8,7 +8,7 @@ $error = '';
 function connectDB($dbname)
 {
     //all you need to change is this to connect to your database
-    $conn = new mysqli("localhost", "root", "Learned2015", $dbname);
+    $conn = new mysqli("localhost", "root", "root", $dbname);
     // check connection
     if ($conn->connect_error) {
         trigger_error('Database connection failed: ' . $conn->connect_error, E_USER_ERROR);

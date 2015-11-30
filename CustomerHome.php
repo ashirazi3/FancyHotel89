@@ -6,6 +6,7 @@ $rs = selectQuery($conn, $query);
 while($row = $rs->fetch_assoc()){
     $_SESSION["username"] = $row["Username"];
 }
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html>

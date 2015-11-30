@@ -31,20 +31,20 @@
         <div class="container" style="margin-left: 10px">
             <h2 style="color: white">Location</h2>
             <select class="element" name="locations" form="search-form">
-                <option value="atlanta">Atlanta</option>
-                <option value="charlotte">Charlotte</option>
-                <option value="savannah">Savannah</option>
-                <option value="orlando">Orlando</option>
-                <option value="miami">Miami</option>
+                <option value="Atlanta">Atlanta</option>
+                <option value="Charlotte">Charlotte</option>
+                <option value="Savannah">Savannah</option>
+                <option value="Orlando">Orlando</option>
+                <option value="Miami">Miami</option>
             </select>
             <h2 style="color: white">Start Date</h2>
             <input class="element" type="date" name="startDate" min="2000-01-02"><br>
-            <h2 style="color: white">Start Date</h2>
+            <h2 style="color: white">End Date</h2>
             <input class="element "type="date" name="endDate" min="2000-01-02"><br>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <input type="submit" name="search" id="search" tabindex="4" class="form-control btn btn-login" value="Search">
+                    <div class="col-sm-3 col-sm-offset-3">
+                        <input type="submit" name="search-room-submit" id="search" tabindex="4" class="form-control btn btn-login" value="Search">
                     </div>
                 </div>
             </div>
