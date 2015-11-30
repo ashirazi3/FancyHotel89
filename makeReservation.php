@@ -1,46 +1,22 @@
+
 <?php
-ini_set('display_errors', '1');
-ini_set('error_reporting', E_ALL);
-
-session_start();
-$error = '';
-
-function connectDB($dbname)
+include('main.php');
+function printTableRow($row)
 {
-    //all you need to change is this to connect to your database
-    $conn = new mysqli("localhost", "root", "Learned2015", $dbname);
-    // check connection
-    if ($conn->connect_error) {
-        trigger_error('Database connection failed: ' . $conn->connect_error, E_USER_ERROR);
-    }
-    return $conn;
-}
-
-function selectQuery($conn, $query)
-{
-    $rs = $conn->query($query);
-    if (!$rs) {
-        trigger_error('Wrong SQL: ' . $query . ' Error: ' . $conn->error, E_USER_ERROR);
+    echo "<tr>";
+    if ($row["Rating"] == 5) {
+        echo "<td>Excellent</td>";
+    } else if ($row["Rating"] == 4) {
+        echo "<td>Good</td>";
+    } else if ($row["Rating"] == 3) {
+        echo "<td>Neutral</td>";
+    } else if ($row["Rating"] == 2) {
+        echo "<td>Bad</td>";
     } else {
-        // $rows_returned = $rs->num_rows;
+        echo "<td>Very Bad</td>";
     }
-    return $rs;
-}
-
-if (isset($_GET['searchRooms'])) {
-    if (empty($_GET['locations']) || empty($_POST['startDate']) || empty($_POST['endDate'])) {
-        $error = "Invalid Selection";
-    } else {
-        $location = $_POST['locations'];
-        $startDate = $_POST['startDate'];
-        $endDate = $_POST['endDate'];
-        $conn = connectDB("FancyHotel");
-        $query = "SELECT * FROM Room WHERE Location ='" . $location . "' AND Room_Num NOT IN (SELECT Room_Num from ReserveRoom, Reservation WHERE Start_Date >'" . $endDate . "' OR End_Date <'" . $startDate . "' AND ReserveRoom.ReservationID = Reservation.ReservationID;";
-        $rs = selectQuery($conn, $query);
-        $_SESSION['username'] = $username;    // Initializing Session
-        header("location: makeReservation.php");        // Redirecting To Transfers Page
-        $conn->close();
-    }
+    echo "<td>" . $row["Comment"] . "</td>";
+    echo "</tr>";
 }
 ?>
 <html lang="en"><head>
@@ -78,8 +54,8 @@ if (isset($_GET['searchRooms'])) {
     <body>
     <div>
     <?php
-    include('main.php');
-    echo "<h1> Welcome ". $_SESSION['username'] .",</h1>";
+      include('main.php');
+      echo "<h1> Welcome ". $_SESSION['username'] .",</h1>";
     ?>
     </div>
         <div class="container">
@@ -96,6 +72,61 @@ if (isset($_GET['searchRooms'])) {
               </tr>
             </thead>
             <tbody>
+            <div>
+              <?php 
+                session_start();
+                $error = '';                
+                function connectDB2($dbname) {
+                  $conn = new mysqli("localhost", "root", "Learned2015", $dbname);
+                  if ($conn->connect_error) {
+                    trigger_error('Database connection failed: ' . $conn->connect_error, E_USER_ERROR);
+                  }
+                  return $conn;
+                }
+                function selectQuery2($conn, $query) {
+                  $rs = $conn->query($query);
+                  if (!$rs) {
+                      trigger_error('Wrong SQL: ' . $query . ' Error: ' . $conn->error, E_USER_ERROR);
+                  } else {
+                      // $rows_returned = $rs->num_rows;
+                  }
+                  return $rs;
+                }
+                if (isset($_POST['search'])) {
+                  if (empty($_POST['locations']) || empty($_POST['startDate']) || empty($_POST['endDate'])) {
+                      $error = "Invalid Selection";
+                  } else {
+                      $location = $_POST['locations'];
+                      $startDate = $_POST['startDate'];
+                      $endDate = $_POST['endDate'];
+                      $conn = connectDB2("FancyHotel");
+                      $query = "SELECT * FROM Room WHERE Location = 'Atlanta';";
+                      $rs = selectQuery2($conn, $query);
+                      while ($row = $rs->fetch_assoc()) {
+                        echo "HI THERE";
+                        echo $row['Row_Num'];
+                        printtableRow($row);
+                      }
+                  }
+                }       
+              ?>
+            </div>
+            <!-- //   ini_set('display_errors', '1');
+            //   ini_set('error_reporting', E_ALL);
+              // echo 'Fuck Off';
+              // session_start();
+              // $error = '';
+
+              // function connectDB($dbname) {
+              //   //all you need to change is this to connect to your database
+              //   $conn = new mysqli("localhost", "root", "Learned2015", $dbname);
+              //   // check connection
+              //   if ($conn->connect_error) {
+              //   trigger_error('Database connection failed: ' . $conn->connect_error, E_USER_ERROR);
+              //   }
+              //   return $conn;
+              } -->
+            <!-- 
               <tr>
                 <td>111</td>
                 <td>Standard</td>
@@ -105,8 +136,12 @@ if (isset($_GET['searchRooms'])) {
                 <td style="text-align: center;">
                     <input type="checkbox" name="extraBed">    
                 </td>
-              </tr>
-            
+              </tr> -->
+            <!--<?php
+              function tableRow() {
+                #echo "<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>";
+              }
+            ?>-->
             </tbody>
            </table>
            <button style="margin-left: 44.5%;" type="button" class="btn btn-primary" onclick="nextSelection();">Check Details</button>

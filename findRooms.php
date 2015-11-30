@@ -31,6 +31,7 @@ if (isset($_POST['searchRooms'])) {
     if (empty($_POST['locations']) || empty($_POST['startDate']) || empty($_POST['endDate'])) {
         $error = "Invalid Selection";
     } else {
+        echo 'HEY, IM HERE'
         $location = $_POST['locations'];
         $startDate = $_POST['startDate'];
         $endDate = $_POST['endDate'];
@@ -41,7 +42,8 @@ if (isset($_POST['searchRooms'])) {
         $_SESSION['location'] = $location;
         $_SESSION['startDate'] = $startDate;
         $_SESSION['endDate'] = $endDate;
-        header("location: makeReservation.php");        // Redirecting To Transfers Page
+        echo 'HEY, IM HERE'
+        #header("location: makeReservation.php");        // Redirecting To Transfers Page
         $conn->close();
     }
 }

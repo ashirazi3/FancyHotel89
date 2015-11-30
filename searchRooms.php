@@ -27,21 +27,27 @@
         <div>
             <h1 style="color: white; margin-left: 10px">Search Rooms</h1>
         </div>
-        <form id="search-form" action="findRooms.php" method="POST" role="form" style="display: block;">
+        <form id="search-form" action="makeReservation.php" method="POST" role="form" style="display: block;">
         <div class="container" style="margin-left: 10px">
             <h2 style="color: white">Location</h2>
-            <select class="element" name="locations">
-                <option value="atlanta">Atlanta,</option>
-                <option value="charlotte">Charlotte,</option>
-                <option value="savannah">Savannah,</option>
-                <option value="orlando">Orlando,</option>
-                <option value="miami">Miami,</option>
+            <select class="element" name="locations" form="search-form">
+                <option value="atlanta">Atlanta</option>
+                <option value="charlotte">Charlotte</option>
+                <option value="savannah">Savannah</option>
+                <option value="orlando">Orlando</option>
+                <option value="miami">Miami</option>
             </select>
             <h2 style="color: white">Start Date</h2>
             <input class="element" type="date" name="startDate" min="2000-01-02"><br>
             <h2 style="color: white">Start Date</h2>
             <input class="element "type="date" name="endDate" min="2000-01-02"><br>
-            <button type="button" name="searchRooms" style="margin-top: 20px; width: 10%"class="btn btn-primary" onclick="makeRes();">Search</button>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="search" id="search" tabindex="4" class="form-control btn btn-login" value="Search">
+                    </div>
+                </div>
+            </div>
         </div>
         </form>
     </body>
