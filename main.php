@@ -34,7 +34,7 @@ if (isset($_POST['login-submit'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $conn = connectDB("FancyHotel");
-        $query = "SELECT * FROM User WHERE Password='" . $password . "' AND Email='" . $username . "';";
+        $query = "SELECT * FROM User WHERE (Password='" . $password . "' AND Email='" . $username . "') OR (Password='" . $password . "' AND Username='" . $username . "');";
         $rs = selectQuery($conn, $query);
 
 
@@ -63,8 +63,21 @@ if (isset($_POST['register-submit'])) {
     $conn = connectDB("FancyHotel");
     $query = "INSERT INTO User(Username, Email, Password, IsManager) VALUES ('$username','$email','$password', 'n')";
     $rs = selectQuery($conn, $query);
+    $conn->close();
+
 }
 
+if(isset($_POST['give-review-submit'])){
+    $username = $_SESSION['username'];
+    $location = $_POST['location'];
+    $rating = $_POST['rating'];
+    $comment = $_POST['comment'];
+    $conn = connectDB("FancyHotel");
+    $query = "INSERT INTO Review(Location, Rating, Comment, Username) VALUES ('$location','$rating','$comment','$username')";
+    $rs = selectQuery($conn, $query);
+    $conn->close();
+
+}
 
 
 ?>
