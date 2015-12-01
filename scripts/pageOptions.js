@@ -33,3 +33,7 @@ function updateReservation(){
 function makeRes(){
      window.location.href = "makeReservation.php";
 }
+
+function deleteCard(){
+    window.location.href = "deleteCard.php";
+}

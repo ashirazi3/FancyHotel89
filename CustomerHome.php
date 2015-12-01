@@ -1,12 +1,26 @@
 <?php
 include('main.php');
-$conn = connectDB("FancyHotel");
-$query = "SELECT Username FROM User WHERE Email='" . $_SESSION["username"] . "' OR Username='" . $_SESSION["username"] . "';";
-$rs = selectQuery($conn, $query);
-while($row = $rs->fetch_assoc()){
-    $_SESSION["username"] = $row["Username"];
+if(strpos($_SESSION["username"], '@') === false){
+
+}else{
+    $conn = connectDB("FancyHotel");
+    $query = "SELECT Username FROM User WHERE Email='" . $_SESSION["username"] . "' OR Username='" . $_SESSION["username"] . "';";
+    $rs = selectQuery($conn, $query);
+    while($row = $rs->fetch_assoc()){
+        $_SESSION["username"] = $row["Username"];
+    }
+    $conn->close();
+    echo $_SESSION["username"];
 }
-$conn->close();
+
+if(isset($_POST["delete-card-submit"])){
+    $cardNum = $_POST["cardNum"];
+    $conn = connectDB("FancyHotel");
+    $query = "DELETE FROM Payment WHERE Payment.Card_Num = '".$cardNum."'";
+//    $query = "De  FROM User WHERE Email='" . $_SESSION["username"] . "' OR Username='" . $_SESSION["username"] . "';";
+    $rs = selectQuery($conn, $query);
+    $conn->close();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -88,6 +102,11 @@ $conn->close();
         <tr style="text-align:center;">
             <td>
                 <button class="btn btn-primary" onclick="viewFeedback();">View feedback</button>
+            </td>
+        </tr>
+        <tr style="text-align:center;">
+            <td>
+                <button class="btn btn-info" onclick="deleteCard()">Delete Saved Card</button>
             </td>
         </tr>
     </table>
