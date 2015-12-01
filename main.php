@@ -39,8 +39,14 @@ if (isset($_POST['login-submit'])) {
 
 
         if ($rs->num_rows == 1) {
-            $_SESSION['username'] = $username;    // Initializing Session
-            header("location: CustomerHome.php");        // Redirecting To Transfers Page
+            while ($row = $rs->fetch_assoc()) {
+                $_SESSION['username'] = $username;    // Initializing Session
+                if ($row["IsManager"] == 'n') {
+                    header("location: CustomerHome.php");        // Redirecting To Transfers Page
+                }else{
+                    header("location: ManagerHomePage.php");        // Redirecting To Transfers Page
+                }
+            }
         } else {
             $error = "Username or Password is invalid";
             echo $error;
@@ -67,7 +73,7 @@ if (isset($_POST['register-submit'])) {
 
 }
 
-if(isset($_POST['give-review-submit'])){
+if (isset($_POST['give-review-submit'])) {
     $username = $_SESSION['username'];
     $location = $_POST['location'];
     $rating = $_POST['rating'];
