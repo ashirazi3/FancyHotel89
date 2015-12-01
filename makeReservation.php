@@ -21,7 +21,7 @@ if (isset($_POST['search-room-submit'])) {
     }
 }
 
-function printTableRow($row)
+function printTableRow($row, $i)
 {
     echo "<tr>";
     echo "<td>" . $row["Room_Num"] . "</td>";
@@ -29,8 +29,8 @@ function printTableRow($row)
     echo "<td>" . $row["Num_People"] . "</td>";
     echo "<td>" . $row["Cost"] . "</td>";
     echo "<td>" . $row["Cost_ExtraBed"] . "</td>";
-    echo "<td><input type=\"checkbox\" name=\"Extra Bed\"></input></td>";
-    echo "<td><input type=\"checkbox\" name=\"".$row["Room_Num"].",".$row["Location"]."\"></input></td>";
+    echo "<td><input id=\"bed" . $i . "\" type=\"checkbox\" name=\"Extra Bed\"></td>";
+    echo "<td><input id=\"" . $i . "\" type=\"checkbox\" name=\"" . $row["Room_Num"] . "," . $row["Location"] . "\"></td>";
 
     echo "</tr>";
 }
@@ -79,7 +79,7 @@ function printTableRow($row)
 <div class="container">
     <h1 style="text-align: center; color: white">Make a Reservation</h1>
     <?php
-    echo "<h3 style=\"text-align: center; color: white\">".$_SESSION["startDate"]." to ".$_SESSION["endDate"]. "</h3>"
+    echo "<h3 style=\"text-align: center; color: white\">" . $_SESSION["startDate"] . " to " . $_SESSION["endDate"] . "</h3>"
     ?>
 
     <form>
@@ -95,16 +95,45 @@ function printTableRow($row)
                 <th>Select Room</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="rooms">
             <?php
             $conn = connectDB("FancyHotel");
-            $query = 'SELECT * FROM Room WHERE Location = "Atlanta" AND Room_Num NOT IN (SELECT Room_Num from ReserveRoom, Reservation WHERE NOT (Start_Date >"2015-11-04" OR End_Date <"2015-11-03") AND (ReserveRoom.ReservationID = Reservation.ReservationID))';
+            //            $query = 'SELECT * FROM Room WHERE Location = "Atlanta" AND Room_Num NOT IN (SELECT Room_Num from ReserveRoom, Reservation WHERE NOT (Start_Date >"2015-11-04" OR End_Date <"2015-11-03") AND (ReserveRoom.ReservationID = Reservation.ReservationID))';
+            $query = 'SELECT * FROM Room WHERE Location = "' . $_SESSION["location"] . '" AND Room_Num NOT IN (SELECT Room_Num from ReserveRoom, Reservation WHERE NOT (Start_Date >"' . $_SESSION["endDate"] . '" OR End_Date <"' . $_SESSION["startDate"] . '") AND (ReserveRoom.ReservationID = Reservation.ReservationID))';
             $rs = selectQuery($conn, $query);
+            $j = 0;
             while ($row = $rs->fetch_assoc()) {
-                printtableRow($row);
+                printtableRow($row, $j);
+                $j++;
             }
             $conn->close();
             ?>
+            <!-- //   ini_set('display_errors', '1');
+            //   ini_set('error_reporting', E_ALL);
+              // echo 'Fuck Off';
+              // session_start();
+              // $error = '';
+
+              // function connectDB($dbname) {
+              //   //all you need to change is this to connect to your database
+              //   $conn = new mysqli("localhost", "root", "Learned2015", $dbname);
+              //   // check connection
+              //   if ($conn->connect_error) {
+              //   trigger_error('Database connection failed: ' . $conn->connect_error, E_USER_ERROR);
+              //   }
+              //   return $conn;
+              } -->
+            <!--
+              <tr>
+                <td>111</td>
+                <td>Standard</td>
+                <td>2</td>
+                <td>100</td>
+                <td>70</td>
+                <td style="text-align: center;">
+                    <input type="checkbox" name="extraBed">
+                </td>
+              </tr> -->
 
             </tbody>
         </table>
@@ -113,6 +142,72 @@ function printTableRow($row)
     <button style="margin-left: 44.5%;" type="button" class="btn btn-primary" onclick="nextSelection();">Check
         Details
     </button>
+</div>
+
+
+<div style="visibility: hidden; padding-top: 100px; padding-bottom: 100px" id="selectRoom" class="container">
+
+    <script>
+
+        function updateTotal() {
+            var total = 0;
+            var start = new Date(<?php
+            echo "\"".$_SESSION["startDate"]."\"";
+        ?>);
+            var end = new Date(<?php
+            echo "\"".$_SESSION["endDate"]."\"";
+        ?>);
+            var days = Math.abs(end - start) / 86400000;
+            var rows = $("#rooms").find("tr");
+            for (var i = 0; i < rows.length; i++) {
+                if ($("#" + i).is(':checked')) {
+                    total += days * (parseFloat(rows[i].cells[3].innerHTML));
+                    if ($("#bed" + i).is(':checked')) {
+                        total += days * (parseFloat(rows[i].cells[4].innerHTML))
+                    }
+                }
+                console.log(total);
+                $("#totalCost").text("Total Cost: $"+total);
+            }
+
+
+        }
+        $(".btn").click(function () {
+            updateTotal();
+        })
+        //        updateTotal();
+    </script>
+    <h3 id="totalCost" class="h3" style="color: white">Total Cost: $0</h3>
+
+    <h3 class="h3" style="color: white">Use Card:</h3>
+
+    <div>
+        <select class="element" name="locations">
+            <?php
+
+            function printCard($row)
+            {
+                echo "<option name=\"" . $row["Card_Num"] . "\">" . $row["Card_Num"] . "</option>";
+            }
+
+            $conn = connectDB("FancyHotel");
+            $query = "SELECT Card_Num FROM Payment WHERE NAME =\"" . $_SESSION["username"] . "\"";
+            $rs = selectQuery($conn, $query);
+            while ($row = $rs->fetch_assoc()) {
+                printCard($row);
+            }
+            $conn->close();
+            ?>
+        </select>
+    </div>
+    <button style="margin-left: 44.5%; margin-top: 10px; width: 10%" type="button" class="btn btn-warning"
+            onclick="addPayment();">Add Card
+    </button>
+    <button style="margin-left: 44.5%; margin-top: 30px; width: 10%" type="button" class="btn btn-primary"
+            onclick="confirm();">Submit
+    </button>
+
+
 </div>
 </body>
 </html>
