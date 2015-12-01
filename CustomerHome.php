@@ -21,6 +21,20 @@ if(isset($_POST["delete-card-submit"])){
     $rs = selectQuery($conn, $query);
     $conn->close();
 }
+
+
+
+if(isset($_POST["cancel-res-submit"])){
+    $reservationID = $_POST["reservationID"];
+    $conn = connectDB("FancyHotel");
+    $query = 'UPDATE Reservation SET Is_Cancelled = "y" WHERE ReservationID ="'. $reservationID.'"';
+    $rs = selectQuery($conn, $query);
+
+    $query2 = 'DELETE FROM ReserveRoom WHERE ReservationID ="'. $reservationID.'"';
+    $rs = selectQuery($conn, $query2);
+    $conn->close();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
