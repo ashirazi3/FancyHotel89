@@ -5,9 +5,9 @@ function deleteCard(){
     elem.style.marginTop = "100px";
     elem.style.marginBottom = "500px"
     $('html, body').animate({scrollTop:$('#blah').position().top}, 'slow');
-
+     
 };
 
 function submit(){
-    window.location.href = "makeReservation.html";
+    window.location.href = "makeReservation.php";
 }

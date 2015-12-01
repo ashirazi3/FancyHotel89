@@ -4,12 +4,12 @@ function nextSelection(){
     elem.style.visibility = "visible";
     elem.style.paddingTop = "100px";
     elem.style.paddingBottom = "100px"
-    $('html, body').animate({scrollTop:$('#tableHead').position().top}, 'slow');
+    $('html, body').animate({scrollTop:$('#selectRoom').position().top}, 'slow');
 
 };
 
 function addPayment(){
-     window.location.href = "paymentInfo.html";
+     window.location.href = "paymentInfo.php";
 }
 
 function confirm(){

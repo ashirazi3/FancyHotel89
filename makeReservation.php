@@ -55,7 +55,7 @@ function printTableRow($row, $i)
         }
 
         th {
-            color: white;
+            color: black;
 
         }
 
@@ -71,7 +71,7 @@ function printTableRow($row, $i)
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="scripts/makeReservation.js"></script>
+    
 </head>
 <body>
 <div>
@@ -83,7 +83,7 @@ function printTableRow($row, $i)
     ?>
 
     <form>
-        <table style="margin-top: 50px" class="table table-striped">
+        <table style="margin-top: 50px; background: silver" class="table table-striped">
             <thead>
             <tr id="theHead">
                 <th>Room Number</th>
@@ -177,37 +177,63 @@ function printTableRow($row, $i)
         })
         //        updateTotal();
     </script>
-    <h3 id="totalCost" class="h3" style="color: white">Total Cost: $0</h3>
 
-    <h3 class="h3" style="color: white">Use Card:</h3>
+    <form action="payment.php" method="POST" role="form">
+            <h3 id="totalCost" class="h3" style="color: white">Total Cost: $0</h3>
 
-    <div>
-        <select class="element" name="locations">
-            <?php
+            <h3 class="h3" style="color: white">Use Card:</h3>
 
-            function printCard($row)
-            {
-                echo "<option name=\"" . $row["Card_Num"] . "\">" . $row["Card_Num"] . "</option>";
-            }
+            <div>
+                <select id="cardDropDown" class="element" name="cardDropDown">
+                    <?php
 
-            $conn = connectDB("FancyHotel");
-            $query = "SELECT Card_Num FROM Payment WHERE NAME =\"" . $_SESSION["username"] . "\"";
-            $rs = selectQuery($conn, $query);
-            while ($row = $rs->fetch_assoc()) {
-                printCard($row);
-            }
-            $conn->close();
-            ?>
-        </select>
-    </div>
-    <button style="margin-left: 44.5%; margin-top: 10px; width: 10%" type="button" class="btn btn-warning"
-            onclick="addPayment();">Add Card
-    </button>
-    <button style="margin-left: 44.5%; margin-top: 30px; width: 10%" type="button" class="btn btn-primary"
-            onclick="confirm();">Submit
-    </button>
+                    function printCard($row)
+                    {
+                        echo "<option name=\"" . $row["Card_Num"] . "\">" . $row["Card_Num"] . "</option>";
+                    }
+
+                    $conn = connectDB("FancyHotel");
+                    $query = "SELECT Card_Num FROM Payment WHERE NAME =\"" . $_SESSION["username"] . "\"";
+                    $rs = selectQuery($conn, $query);
+                    while ($row = $rs->fetch_assoc()) {
+                        printCard($row);
+                    }
+                    $conn->close();
+                    ?>
+                    <option id="cardNew" value="Add new card">Add new card</option>
+                </select>
+            </div>
+           <!--  <button style="margin-left: 44.5%; margin-top: 10px; width: 10%" type="button" class="btn btn-warning"
+                    onclick="addPayment();">Add Card
+            </button> -->
+
+            <div id="addNewCard" style="visibility: hidden; text-align: center">
+                <h3 style="color:white"> Add a new card:</h3>
+                <br>
+                <input name="cardName" id="cardName" type="text" placeholder="Name on card">
+                <input name="cardNo" id="cardNo" type="number" max="9999999999999999" placeholder="Card Number">
+                <input name="expiry" id="expiry" type="text" placeholder="yyyy-mm" placeholder="yyyy-mm">
+                <input name="cvv" id="cvv" type="number" max="999" placeholder="CVV">
+                <br>
+            </div>
+            <script>
+                $("#cardDropDown").val($("#cardDropDown option:first").val());
+                $("#cardDropDown").change(function(){
+                    var add = document.getElementById("cardDropDown");
+                    if(add.options[add.selectedIndex].value == "Add new card"){
+                        document.getElementById("addNewCard").style.visibility = "visible";
+                    }
+                })
+            </script>
+            <!-- <button style="margin-left: 44.5%; margin-top: 30px; width: 10%" type="button" class="btn btn-primary"
+                    onclick="confirm();">Submit
+            </button> -->
+            <br>
+            <input type="submit" name="submit-card" id="submit-card" tabindex="4" class="form-control btn btn-primary" value="Submit" style="width:10%; margin-left: 45%">
+    </form>
 
 
 </div>
+<script type="text/javascript" src="scripts/makeReservation.js"></script>
 </body>
 </html>
