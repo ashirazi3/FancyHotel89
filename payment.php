@@ -5,6 +5,7 @@
 
         // echo "goes";
         if(isset($_POST['submit-card'])){
+            $conn = connectDB("FancyHotel");
             $card_Number = $_POST['cardDropDown'];        
             if($card_Number == "Add new card"){
                 $name = $_POST['cardName'];
@@ -13,7 +14,6 @@
                 $expirationDate = $_POST['expiry'] . "-30";
                 $username = $_SESSION["username"];
                 $cvv = $_POST['cvv'];
-                $conn = connectDB("FancyHotel");
                 $query = "INSERT INTO Payment VALUES ('$cardNum', '$name', \"$expirationDate\",'$cvv', '$username')";
                 $rs = selectQuery($conn, $query);
                 // $conn->close();
