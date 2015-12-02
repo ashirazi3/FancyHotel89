@@ -9,6 +9,7 @@ function nextSelection(){
     elem.style.paddingBottom = "100px"
     $('html, body').animate({scrollTop:$('#selectRoom').position().top}, 'slow');
 
+
 };
 
 function addPayment(){
@@ -17,4 +18,8 @@ function addPayment(){
 
 function confirm(){
     window.alert("Reservation ID: 54099");
+}
+
+function takeMeBack(){
+	window.location.href = "CustomerHome.php";
 }

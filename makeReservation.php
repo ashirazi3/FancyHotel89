@@ -231,7 +231,7 @@ function printTableRow($row, $i)
         </button> -->
         <br>
         <input type="submit" name="submit-card" id="submit-card" tabindex="4" class="form-control btn btn-primary"
-               value="Submit" style="width:10%; margin-left: 45%">
+               value="Submit" style="width:10%; margin-left: 45%" onclick="takeMeBack()">
     </form>
 
 

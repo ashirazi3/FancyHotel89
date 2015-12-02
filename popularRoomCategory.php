@@ -49,7 +49,7 @@ function printReservationRow($row)
 where Reservation.ReservationID = ReserveRoom.ReservationID
 and ReserveRoom.Room_Num = Room.Room_Num
 and ReserveRoom.Location = Room.Location
-GROUP BY MONTH(Start_Date), Category";
+GROUP BY MONTH(Start_Date), ReserveRoom.Location";
         $rs = selectQuery($conn, $query);
         while($row = $rs->fetch_assoc()){
             printReservationRow($row);

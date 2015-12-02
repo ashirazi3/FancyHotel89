@@ -60,7 +60,7 @@
                 </table>
                 
                     <!--button class="btn btn-primary" onclick="submit();">Save</button-->
-                    <input style="width: 10%" type="submit" name="submit-card" id="submit-card" class="form-control btn btn-primary" value="Save">
+                    <input style="width: 10%" type="submit" name="submit-card" id="submit-card" class="form-control btn btn-primary" value="Save" >
 
             </form>
             <hr style="background-color: #fff">
