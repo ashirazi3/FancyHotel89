@@ -29,8 +29,8 @@ function printTableRow($row, $i)
     echo "<td>" . $row["Num_People"] . "</td>";
     echo "<td>" . $row["Cost"] . "</td>";
     echo "<td>" . $row["Cost_ExtraBed"] . "</td>";
-    echo "<td><input id=\"bed" . $i . "\" type=\"checkbox\" name=\"Extra Bed\"></td>";
-    echo "<td><input id=\"" . $i . "\" type=\"checkbox\" name=\"" . $row["Room_Num"] . "," . $row["Location"] . "\"></td>";
+    echo '<td><input name="*bed'.$row["Room_Num"].'" id="bed"'. $i . '" type="checkbox" name="Extra Bed"></td>';
+    echo '<td><input id="' . $i . '" type="checkbox" name="' . $row["Room_Num"] . ',' . $row["Location"] . '"></td>';
 
     echo "</tr>";
 }
@@ -82,7 +82,7 @@ function printTableRow($row, $i)
     echo "<h3 style=\"text-align: center; color: white\">" . $_SESSION["startDate"] . " to " . $_SESSION["endDate"] . "</h3>"
     ?>
 
-    <form>
+    <form action="payment.php" method="POST" role="form">
         <table style="margin-top: 50px; background: silver" class="table table-striped">
             <thead>
             <tr id="theHead">
@@ -137,7 +137,6 @@ function printTableRow($row, $i)
 
             </tbody>
         </table>
-    </form>
 
     <button style="margin-left: 44.5%;" type="button" class="btn btn-primary" onclick="nextSelection();">Check
         Details
@@ -168,6 +167,7 @@ function printTableRow($row, $i)
                 }
                 console.log(total);
                 $("#totalCost").text("Total Cost: $"+total);
+                $("#total").val(total);
             }
 
 
@@ -178,9 +178,8 @@ function printTableRow($row, $i)
         //        updateTotal();
     </script>
 
-    <form action="payment.php" method="POST" role="form">
             <h3 id="totalCost" class="h3" style="color: white">Total Cost: $0</h3>
-
+            <input name="total" id="total" type="text" style="visibility: hidden">
             <h3 class="h3" style="color: white">Use Card:</h3>
 
             <div>
